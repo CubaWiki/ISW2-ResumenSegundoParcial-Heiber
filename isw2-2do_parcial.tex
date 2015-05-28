@@ -1,0 +1,534 @@
+\documentclass[a4paper,spanish]{article}
+
+\usepackage[spanish,activeacute]{babel}
+\usepackage{moreverb}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\oddsidemargin 0in
+\textwidth 6.2in
+\topmargin 0in
+\addtolength{\topmargin}{-.5in}
+\textheight 10in
+\parskip=1ex
+\pagestyle{fancy}
+%usar el segundo nivel de enumeracion con letras
+%\renewcommand{\labelenumii}{\alph{enumii}. }
+
+\newcommand{\rev}[0]{\marginpar{REVISAR}}
+\newcommand{\nohecho}[0]{\marginpar{NO HECHO}}
+
+\newcommand{\tab}[0]{\hspace*{0.5cm}}
+
+\newcommand{\then}[0]{\ensuremath{\Rightarrow}~}
+
+\newenvironment{items}{
+		\vspace*{-\topsep}
+		\begin{itemize} 
+		\addtolength{\itemsep}{-0.5\baselineskip}
+		}{\end{itemize}\vspace*{-\topsep}}
+
+\newenvironment{numbers}{
+		\vspace*{-\topsep}
+		\begin{enumerate} 
+		\addtolength{\itemsep}{-0.5\baselineskip}
+		}{\end{enumerate}\vspace*{-\topsep}}
+
+%noindent en todos lados
+\parindent=0in 
+
+\lhead{Ingenier\'ia de Software II}
+\rhead{Apunte de repaso segundo parcial}
+
+\cfoot{$\thepage$ de \pageref{theend}}
+
+
+\begin{document}
+
+Disclaimer: Este apunte no es autocontenido y fue pensado como un repaso de los conceptos, 
+no para aprenderlos de aqu'i directamente.
+%\begin{multicols}{2}
+%\tableofcontents
+%\end{multicols}
+
+\section{Metodolog\'ias \'Agiles}
+
+Las metodolog'ias 'agiles cambian el foco respecto de las tradicionales:\\
+\begin{tabular}{lcl}
+Individuos y sus interacciones &$>$& herramientas + procesos \\
+Construir software &$>$& documentaci'on completa \\
+Colaboraci'on con el cliente &$>$& negociaci'on de contratos \\
+Responder ante el cambio &$>$& el seguimiento del plan
+\end{tabular}
+
+Principios b'asicos:
+\begin{items}
+\item Visibilidad
+\item Inspecci'on (detectar desvios a tiempo)
+\item Adaptaci'on
+\end{items}
+
+Otras caracter'isticas: Emp'iricas, ``livianas'', adaptativas, r'apidas pero
+	no apuradas, emergentes (!), exponen p'erdidas, centradas en el cliente,
+	decisiones en niveles bajos, self-organized, time boxed
+
+Se asume que va a haber cambios, se toma el mismo como forma de acercarse al
+deseo del cliente. Igualmente tiene mecanismos de control y estructura.
+
+No sirven en equipos grandes o distribuidos (baja comunicaci'on), si hay poca
+	experiencia, en donde todo ya anda bien y cuando es dificil definir tarea
+	terminada.
+
+\subsection{SCRUM}
+
+Pasos de SCRUM: 
+\begin{numbers}
+\item Product backlog: Conjunto de items que son user stories 
+	(reqs func y no func). Es lo que se sabe que se quiere que este en
+	el producto final.
+\item Sprint planning: Seleccionar subconjunto del product backlog seg'un
+	priorizaci'on del cliente y dividir	los items en tareas seg'un cree
+	el team.
+\item Sprint backlog: Items + taskboard
+\item SPRINT (daily standups): Personas se autoasignan tareas del taskboard y
+	las hacen. Daily standups: Cerditos dicen lo que hicieron, los pollitos 
+	miran. Sirve para dar comunicaci'on y que todos vean la big picture (las
+	cosas se retrasan un dia por vez por falta de comunicaci'on). El taskboard
+	se actualiza todos los dias con estimaci'on de tiempo de tareas (1-16 hs).
+	Tareas largas hacen daily standups improductivos (todos dicen ``lo mismo
+	que ayer'').
+\item Producto incrementado 
+\item Sprint review: Con el cliente, managment y product owner. Feedback.
+\item Sprint retrospective: Sin el cliente, mejorar el proceso.
+\end{numbers}
+
+Roles de SCRUM:
+\begin{items}
+\item Scrum master: Usa la lista de impediments para resolverlos. Asegura el
+	cumplimiento del proceso.
+\item Product owner: ``Abogado'' del cliente. Su objetivo es maximizar ROI.
+	Prioriza los reqs, resume la input del cliente. Puede cambiar reqs entre
+	sprints, puede aceptar/rechazar.
+\item Team: Los que hacen. No hay roles, solo skills (desarrollo, testing,
+	analista funcional). Estima y define sprint.
+\end{items}
+
+Inicio: Product backlog con items iniciales, funcionalidad y \#sprints hasta
+	el release, evaluaci'on de riesgos, capacitiaci'on de la gente (incluido
+	cliente) en SCRUM. \\
+Fin: Cierre release, instalaci'on, documentaci'on y entrenamiento.
+
+Especificaci'on: Epics (grupos de funcionalidad), user stories (detalle de 
+	epics) que incluyen CU y casos de aceptaci'on.
+
+\subsection{eXtreme Programming}
+
+Roles vs responsabilidades: Cualquiera podr'ia tomar cualquier rol: 
+	Desarrollador, cliente, tester, tracker, consultor, coach, manager.
+	
+Valores principales: Comunidad, simplicidad, feedback, coraje y respeto.
+
+Pr'acticas:
+\begin{items}
+\item Planning process
+\item Releases chicos, iteraciones cortas
+\item Met'aforas (lenguaje com'un con el cliente)
+\item Dise~no simple.
+\item Testing continuo como parte integral del desarrollo
+\item Refactoring
+\item TDD (test-driven development): Escribir test antes de desarrollar, 
+	correrlo para que falle, arreglarlo.
+\item Pair programming \then Collective ownership (rotar pares y roles dentro
+	del par)
+\item Collective ownership
+\item Integraci'on continua
+\item Semana de 40 horas
+\item Cliente on-site
+\item Est'andar de c'odigo
+\end{items}
+
+Ciclo dorado: \\
+requerimientos cambiantes \then dise~no emergente \then refactoring \then
+testing continuo \then pair programming \then collective ownership \then
+on-site client
+
+\begin{tabular}{l|l|l|l}
+& Exploration & Commitment & Steering \\
+\hline
+Release planning & stories/priorizar & alcance release & ajustes +/- reqs \\
+\hline
+Iteration planning & task cards & asignar tasks, estimaci'on & iteraci'on de
+	trabajo y contraste con stories
+\end{tabular}
+
+\section{Software Configuration Managment (SCM)}
+
+Control de cambios: Custodiar integridad y acompa~nar los cambios con control.
+
+Incremento en complejidad: \\
+\tab Soft: Multiplataforma, $>$ tama~no, interfases, OTS \\
+\tab Env: Tama~no, distribuci'on geogr'afica del team, frecuentes releases,
+	cambios SO/hard.
+	
+\begin{numbers}
+\item Id y almacenar artefactos en repositorio seguro
+\item Controlar y auditar cambios en artefactos (aumenta el control al 
+	avanzar el proy)
+\item Organizar artefactos en SCM components:
+	\begin{items}
+	\item Contribuye a preservar integridad
+	\item Reduce complejidad (D\&C)
+	\item Facilita determinaci'on del nivel de calidad
+	\item Aumenta el c'odigo compartido y el reuso
+	\end{items}
+\item Crear baseline para cada milestone del proyecto
+	\begin{items}
+	\item + Baselines al final de iteraci'on o etapa de entrega
+	\item + Reproducibilidad (versiones). Id problemas introducidos en 
+		releases nuevos.
+	\item + Traceability (unif. artefactos)
+	\item Reporting / logging (facilita debug y notas de release, diffs)
+	\end{items}
+\item Registro y seguimiento de pedidos de cambio (change request managment)
+\item Mantener entorno de trabajo estable
+\item Soportar cambios concurrentes sobre artefactos
+\item Integraci'on en forma temprana y frecuente
+\item Asegurar que es posible reproducir releases (mantenimiento)
+\end{numbers}
+
+Integraci'on: Merge o assembly.
+
+Consistencia: Turn-taking, split-merge o copy-merge.
+
+\section{Calidad}
+
+Definiciones:
+\begin{items}
+\item Aptitud para uso
+\item Ausencia de defectos
+\item Satisfacci'on de requerimientos
+\item Nivel hasta el que un producto tiene un conjunto de atributos
+\end{items}
+
+V\&V:\\
+\tab Validaci'on: Producto correcto (requerimientos correctos)
+\tab Verificaci'on: C'odigo correcto respecto de los requerimientos
+
+Error (humano) \then Defecto (en el c'odigo) \then Falla (observable)
+
+Modelo en V:\\
+\begin{tabular}{ll}
+Requerimientos de sistema    & \tab\tab\tab\tab Integraci'on del sistema \\
+\tab Requerimientos de soft  & \tab\tab\tab Test de aceptaci'on \\
+\tab\tab Dise~no arquitectura             & \tab\tab Integraci'on de software \\
+\tab\tab\tab Dise~no detallado        & \tab Test de componentes \\
+\tab\tab\tab\tab Implementaci'on en c'odigo     & Test de unidad \\
+\end{tabular}
+
+Testing: El crear tests ya ayuda por el proceso mental de pensarlos. \\
+>Cu'ando termina? Heur'isticas usuales: No hay fallas, porcentaje aceptable de
+fallas, \# defectos hallados $\sim$ \# defectos estimados, error seeding.
+
+Tipos de test:
+\begin{items}
+\item De unidad
+\item De integraci'on
+\item De sistema
+\item De aceptaci'on: Baasado en requerimientos, dise~nado y ejecutad por
+	usuarios
+\item De vol'umen y performance (borde)
+\item De stress (exceso)
+\item De regresi'on (luego de un cambio, ver que no se introdujeron fallas)
+\item $\alpha$ (usuario interno) $\beta$ (usuario real)
+\item De usabilidad
+\item Funcional: Tipos de fallas, sincronizados con la especificaci'on que les
+	di'o origen.
+\end{items}
+
+Revisiones
+\begin{items}
+\item Walkthrough: Presentador (conoce a fondo el producto) + asistentes
+\item Revisiones (formalidad intermedia)
+\item Inspecciones de c'odigo (mayor formalidad): Lector, revisor, autor, 
+	registrador y moderador. Obtiene como resultado de cada error: ubicaci'on,
+	descripci'on, severidad y tipo (interfaz, datos, l'ogica). Objetivos
+	secundarios:
+	\begin{items}
+	\item Aumentar visibilidad
+	\item Buscar consenso
+	\item Favorecer trabajo en equipo
+	\item Obtener datos para las m'etricas
+	\item Lector, revisor, 
+	\end{items}
+	Hay que hacerla cuando el testing es intermedio, al principio hay 
+	demasiados bugs y luego de testing exhaustivo no hay lugar para el 
+	trabajo.
+\end{items}
+
+\section{M\'etricas}
+
+Objetivo previamente esclarecido: \\
+Identificar objetos del dominio \then definir escala (relacionada con los 
+	objetos)
+
+>Para qu'e usar m'etricas?
+\begin{items}
+\item Extender y modelar procesos y productos
+	\begin{items}
+	\item Comparar lineas de base ($\neq$ versiones)
+	\item Predecir el efecto de un cambio
+	\item Calcular esfuerzo/recursos/tipos de error comunes
+	\end{items}
+\item Administraci'on: Estimaci'on, detectar desvios, averiguar relaci'on 
+	entre par'ametros (ej: erroes/linea de c'odigo)
+\end{items}
+
+Las m'etricas pueden ser de producto, de proyecto o de proceso.
+
+\subsection{Goal Question Metric (GQM)}
+
+Goal: Parte conceptual, objetivo. \\
+Question: Parte operacional, modelo. \\
+Metric: Parte cuantitativa, m'etrica.
+
+Construir software \then proceso de ingenier'ia \then retroalimentaci'on y
+	evaluaci'on \then objetivos medibles dirigidos por un modelo.
+	
+El objetivo depende de la perspectiva (cliente $\neq$ proyeto $\neq$ 
+	corporaci'on).
+	
+\begin{numbers}
+\item Definir objetivo de proyecto y corporativo: Operacionalmente refinado
+	con preguntas medibles.
+\item >Qu'e datos ``hablan'' sobre ese objetivo?
+\item Definir m'etricas de respuesta y universo de interpretaci'on
+\item Medir
+\item Interpretar
+\end{numbers}
+
+Fallas: Medir demasiado (medir indicadores irrelevantes), usar resultados para
+	premio o castigo, cortoplazismo, esfuerzo de medici'on no homog'eneo,
+	no usar el resultado de las mediciones.
+	
+\subsection{Alta madurez}
+
+Alta madurez: Gesti'on cuantitativa de procesos y productos. \\
+\tab Seg'un CMMI: Uso sistem'atico de mediciones de los procesos para predecir
+	costos, cronograma y defectos y establecer un rango de performance.
+	
+\begin{tabular}{rcccl}
+& Mejorar & \\
+$\swarrow$ & & $\nwarrow$ \\
+Definir & Controlar & $\longleftarrow$ Medir \\
+$\searrow$ & $\downarrow$ & $\nearrow$ \\
+& Ejecutar &
+\end{tabular}
+
+Definiciones de procesos:
+\begin{items}
+\item Performance (del proceso): Calidad, costo, tiempo
+\item Capacidad: Rangos de atributos
+\item Control cuantitativo (no estad'istico)
+\item Control estad'istico
+\item Estabilidad: Predicabilidad
+\end{items}
+
+CMMI N4:
+\begin{items}
+\item Baseline de performance y modelos
+\item Manejar cuantitativamente
+\item Manejar performance de subprocesos estad'isticamente
+\end{items}
+
+Saber como se comporta el proceso con n'umeros: \% de tiempo de gesti'on. \# de
+	bugs en un peer review. \then Planificar (qu'e, c'omo y cu'ando medir)
+	\then Acumular n'umeros de muchos proyectos \then Predecir 
+	estad'isticamente.
+
+Trabajo: Serie de procesos interconectados, todos pueden fallar.
+\begin{items}
+\item Entender pasado cuantitativamente
+\item Controlar presente cuantitativamente
+\item Predecir futuro cuantitativamente
+\end{items}
+
+Causas: comunes (esperables) vs especiales (no esperables) de variaci'on.
+
+Mediciones a varios niveles: Empresa, l'inea de producto, proyecto, proceso,
+	subproceso. Mas alto, menos preciso el an'alisis.
+	
+Control estad'istico: Problemas: Muy dificil distinguir causas comunes de 
+	especiales. Si o si tienen que ser proyectos homog'eneos (tecnolog'ia,
+	tama~no).
+	
+SPC
+\begin{items}
+\item Elegir procesos adecuadamente, no combinar datos de organizaciones $\neq$
+\item Ajustar l'imites
+\item Efecto hawthorne (el medir perturba, incertidumbre)
+\item Comportamiento disfuncional (se trabaja para la m'etrica)
+\end{items}
+
+CMMI N5: Pasar de detectar a prevenir defectos. Mejorar segun entendimiento
+	cuantitativo.
+\begin{items}
+\item Detectar causas de defectos \then atacarlas
+\item Seleccionar mejores \then implementarlas (incluye medir sus efectos)
+\end{items}
+
+Al analizar causas de defectos: Identificar, clasificar y priorizar. 
+	Identificar efecto y sus posibles soluciones. Prevenir nueva aparici'on
+	(hacer pilotos con objetivos de performance y medirlos, si andan, 
+	extender).
+
+Alta madurez en CMMI: N4: Comprensi'on y administraci'on de variaci'on de 
+	procesos para obtener calidad. N5: Mejorar tecnolog'ias innovadoras. 
+	Implementarlas utilizando conocimiento cuantitativo.
+
+\section{Architecture Trade-off Analysis Method (ATAM)}
+
+Utilidad: Valoraci'on del stakeholder (SH) \\
+Valor: Caracterizaci'on del impacto de las decisiones
+
+Beneficios:
+\begin{items}
+\item Fuerza la preparaci'on de material para review
+\item Captura motivaciones de la arquitectura
+\item Determinaci'on temprana de problemas
+\item Valida requerimientos
+\item Mejora arquitectura
+\end{items}
+
+Dificultad: Muchos SH \then diferencias valoraciones de utilidad \then 
+	v'inculo decisiones de dise~no - visibilidad SH
+	
+Precondiciones:
+\begin{items}
+\item Requerimientos y objetivos de arquitectura articulados
+\item Alcance definido
+\item Cost-efectiveness
+\item Miembros clave disponibles (SH de la arquitectura y project-decision 
+	makers)
+\item Team de evaluaci'on competente (3 a 5 externos, parte de QA o ad-hoc)
+\item Expectativas gestionadas
+\end{items}
+
+Fases: \\
+0. Contratos y NDAs, informaci'on inicial requerida (introducci'on) \\
+1. Evaluaci'on. Team + decision makers (uniformizar) \\
+2. Evaluaci'on. Team + decision makers + SH (consenso) \\
+3. Segumiento, emisi'on de resultados, analisis post-mortem
+
+'Arbol de utilidad: Tiene objetivos de calidad en los nodos y escenarios en 
+	las hojas.
+
+\begin{numbers}
+\item Presentar ATAM y 'arboles de utilidad
+\item Presentar drivers de negocio: Requerimientos funcionales y de calidad
+\item Presentar arquitectura: Restricciones t'ecnicas, otros sistemas para
+	interactuar
+\item Identificar enfoques de la arquitectura: Aspectos clave QA
+\item Generar 'arbol de utilidad de atributos de calidad.
+\item Analizar enfoques de la arquitectura: Identificar enfoques QA 
+	prioritarios, generar preguntas para QA prioritarios, identificar riesgos,
+	no-riesgos, puntos sensibles y compromisos.
+\item Brainstorming: Priorizar escenarios. Agregar escenarios al 'arbol 
+	inicial (los iniciales sirven de ejemplo)
+\item Analizar enfoques de arquitectura sobre lo surgido en el punto anterior
+\item Presentar resultados. Salidas:
+	\begin{items}
+	\item Presentaci'on concisa de arquitectura
+	\item Articulaci'on de los objetivos del negocio
+	\item Requerimientos de calidad expresados en escenarios
+	\item Mapeo de requerimientos de calidad con decisiones arquitect'onicas
+	\item Identificaci'on de puntos sensibles, trade-offs, risks y non-risks
+		(asunciones)
+	\item Risk themes
+	\end{items}
+\end{numbers}
+
+\begin{tabular}{lccccccl}
+$\longrightarrow$ & Drivers & $\rightarrow$ & QA & $\rightarrow$ & Escenarios & $\longrightarrow$ & Analisis \\
+$\longrightarrow$ & Arquitectura & $\rightarrow$ & Approach & $\rightarrow$ & Decisiones & $\longrightarrow$ & $\downarrow$ \\
+$\uparrow$ & & & & & & & $\downarrow$ \\
+$\uparrow$ & & & & & Trade-offs & $\longleftarrow$ & $\downarrow$ \\
+$\uparrow$ & & & & & Puntos sensibles & $\longleftarrow$ & $\downarrow$ \\
+$\uparrow$ & & & & & No-riesgos & $\longleftarrow$ & $\downarrow$ \\
+$\nwarrow$ & $\longleftarrow$ & $\leftarrow$ & $\longleftarrow$ & $\leftarrow$ & Riesgos & $\longleftarrow$ & $\downarrow$ \\
+\end{tabular}
+
+Conclusiones:
+\begin{items}
+\item $\uparrow$ Perspectiva de calidad para usuario
+\item $\uparrow$ Priorizaci'on de dificultad y utilidad
+\item $\uparrow$ Consenso sobre riesgos y no-riesgos
+\item $\uparrow$ Base documentada del modelo
+\item $\downarrow$ No evaluo costo
+\item $\downarrow$ No variaciones de escenarios (discreto)
+\item $\downarrow$ No es cuantitativo
+\end{items}
+
+Variaciones de escenarios: Comparar distintos posibles valores de respuesta
+	(no binario). Curva utilidad/respuesta. Expresar concretamente QA.
+
+\section{Administraci'on de requerimientos y SQA}
+
+Areas de conocimiento: \\
+\begin{items}
+\item Ingenier'ia de requerimientos
+	\begin{items}
+	\item Development
+		\begin{items}
+		\item Elicitation
+		\item An'alisis
+		\item Especificaci'on
+		\item Validaci'on
+		\end{items}
+	\item Managment
+	\end{items}
+\end{items}
+
+Deseable de los reqs: Completo, correcto, factible, verificable, necesario, 
+	priorizado, no ambig"uo.
+
+Managment: Procesos relacionados con requerimientos: Cambios, agregados, 
+	asignaci'on a iteraciones. \\
+Managment de cambios sobre artefactos $\in$ linea de base: Pasos de un SH 
+	desde un change request a un artefacto (en particular requirement change)
+	hasta una decisi'on.
+	
+Tipos de cambio a requerimientos:
+\begin{items}
+\item Cambio: En contra o mayor a requerimiento aprobado
+\item Mejoras: ``Peque~nas'' no expresadas en los requerimientos (= implican
+	esfuerzo)
+\end{items}
+
+Gesti'on de cambio: Es importante el workflow. Objetivo: Controlar cambios
+	(no evitarlos!). Las metodolog'ias 'agiles tambi'en tienen!
+
+CCB (configuration control board). Equipo que toma decisiones de cambios. 
+	Puede haber varios seg'un el tipo de cambio e incluso una jerarqu'ia.
+	
+Desarrollo iterativo: El cambio es bienvenido! Al prinicipio hay muchos CU
+	nuevos pero al final hay mayormente cambios a los existentes. \then
+	>Como especifico cambios? >Seguimiento? >Alcance? $\Delta$CU: Especifico
+	solo la diferencia.
+	
+SQA: Conjunto de tareas que:
+\begin{items}
+\item Eval'uan objetivamente la ejecuci'on de procesos y los entregables
+\item Identifican, documentan y aseguran el correcto trato de desvios
+\item Provee feedback sobre QA
+\end{items}
+
+Objetivos de QA: (no garantiza que todo ande bien!)
+\begin{items}
+\item Dar visibilidad a la gerencia (especialmente desvios)
+\item Asegurar cumplimiento del proceso
+\item Ayudar a ``poner la calidad'' (a trav'es de revisiones)
+\end{items}
+
+\label{theend}
+\end{document}
